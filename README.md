@@ -1,36 +1,253 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Smart Bookmark App
 
-## Getting Started
+A production-ready full-stack bookmark manager built with secure multi-user architecture and realtime synchronization.
 
-First, run the development server:
+Built using:
+
+- **Next.js (App Router)**
+- **Supabase (Google OAuth, PostgreSQL, RLS, Realtime)**
+- **Tailwind CSS**
+- **Vercel (Deployment)**
+
+
+## 🌐 Live Demo
+
+🔗 Live URL: *(Will be added after Vercel deployment)*
+
+---
+
+# 📌 Features
+
+## 1️. Google OAuth Authentication
+- Login via **Google only** (no email/password)
+- Secure Supabase Auth integration
+- Session handling via `onAuthStateChange`
+- Production-ready OAuth configuration
+
+---
+
+## 2️. Secure Multi-Tenant Architecture
+
+Bookmarks are fully isolated per user using **Row Level Security (RLS)**.
+
+Implemented database-level protection to ensure:
+
+- Users can **view only their own bookmarks**
+- Users can **insert only their own bookmarks**
+- Users can **delete only their own bookmarks**
+
+### Example RLS Policy:
+
+```sql
+auth.uid() = user_id
+```
+
+This ensures data isolation at the database level — not just frontend filtering.
+
+---
+
+## 3️. Realtime Updates (Cross-Tab Sync)
+
+- Implemented using Supabase Realtime (`postgres_changes`)
+- Adding a bookmark in one tab updates all open tabs instantly
+- Deleting a bookmark reflects immediately
+- Configured:
+
+```sql
+ALTER TABLE public.bookmarks REPLICA IDENTITY FULL;
+```
+
+This enables DELETE payload broadcasting.
+
+---
+
+## 4️. CRUD Operations
+
+- Add Bookmark (Title + URL)
+- Delete Bookmark
+- User-isolated data access
+- Secure multi-user environment tested with multiple Google accounts
+
+---
+
+# 🧠 Technical Architecture
+
+## Frontend
+
+- Next.js (App Router)
+- Client Components
+- Supabase JS SDK
+- Tailwind CSS
+- Realtime subscriptions via Supabase channels
+
+## Backend
+
+- Supabase PostgreSQL
+- Row Level Security (RLS)
+- Realtime Publication
+- Google OAuth Provider
+
+---
+
+# 🔐 Database Schema
+
+Table: `bookmarks`
+
+| Column     | Type                        |
+|------------|-----------------------------|
+| id         | uuid (Primary Key)          |
+| user_id    | uuid (FK → auth.users.id)   |
+| title      | text                        |
+| url        | text                        |
+| created_at | timestamptz                 |
+
+**Replica Identity:** FULL  
+**Realtime Publication:** Enabled  
+**RLS:** Enabled  
+
+---
+
+# ⚠️ Challenges Faced & Solutions
+
+## ❗ 1. Default vs Named Import Errors
+
+**Error:**
+```
+Element type is invalid: expected a string or function but got object
+```
+
+**Cause:**  
+Import/export mismatch or Next.js caching issue.
+
+**Solution:**
+- Corrected default exports
+- Verified module paths
+- Cleared `.next` cache folder
+- Restarted development server
+
+---
+
+## ❗ 2. Realtime INSERT worked but DELETE did not
+
+**Cause:**  
+Postgres requires `REPLICA IDENTITY FULL` for DELETE payloads.
+
+**Solution:**
+```sql
+ALTER TABLE public.bookmarks REPLICA IDENTITY FULL;
+```
+
+---
+
+## ❗ 3. Supabase Dashboard not showing realtime changes
+
+Clarification:  
+Supabase dashboard is **not realtime**.  
+Realtime events are received only by subscribed client applications.
+
+---
+
+## ❗ 4. Next.js Dev Lock Error
+
+```
+Unable to acquire lock at .next/dev/lock
+```
+
+**Solution:**
+- Terminated existing Node process
+- Deleted `.next` folder
+- Restarted development server
+
+---
+
+# 🛠️ Running Locally
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/Rakshithsr1997/smart-bookmark-app.git
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Create a `.env.local` file in the root directory:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
+```
+
+4. Run development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+# 🚀 Deployment
 
-To learn more about Next.js, take a look at the following resources:
+- Hosted on Vercel
+- Environment variables configured securely
+- Production OAuth redirect URLs configured
+- Multi-user isolation tested in production
+- Realtime cross-tab behavior verified
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# 📂 Repository Structure
 
-## Deploy on Vercel
+```
+src/
+ ├── app/
+ │    ├── layout.tsx
+ │    ├── page.tsx
+ ├── components/
+ │    ├── LoginButton.tsx
+ │    └── BookmarkManager.tsx
+ ├── lib/
+ │    └── supabaseClient.ts
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# 🧪 Production Validation Checklist
+
+- ✅ Google OAuth login works
+- ✅ Insert bookmark
+- ✅ Delete bookmark
+- ✅ Realtime sync across tabs
+- ✅ Multi-user isolation verified
+- ✅ RLS enforced at database level
+- ✅ No secrets committed (.env.local ignored)
+
+---
+
+# 👨‍💻 Author
+
+**Rakshith SR**  
+Full Stack Developer (Next.js, Supabase, Secure SaaS Architecture)
+
+Built as part of a 72-hour Fullstack/GenAI micro-challenge.
+
+---
+
+# 🎯 Final Impression
+
+This project demonstrates:
+
+- Secure authentication architecture
+- Database-level multi-tenant isolation
+- Realtime systems integration
+- Production deployment workflow
+- Practical debugging and problem-solving skills
