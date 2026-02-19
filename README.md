@@ -12,7 +12,7 @@ Built using:
 
 ## 🌐 Live Demo
 
-🔗 Live URL: *(Will be added after Vercel deployment)*
+🔗 Live URL: https://smart-bookmark-app-iota-eight.vercel.app/
 
 ---
 
@@ -251,3 +251,27 @@ This project demonstrates:
 - Realtime systems integration
 - Production deployment workflow
 - Practical debugging and problem-solving skills
+
+
+## 📸 Production Validation
+
+### 1️⃣ Google OAuth Login
+![Login](./src/public/screenshots/01-google-login-success.png)
+
+---
+
+### 2️⃣ Dashboard After Login
+![Dashboard](./src/public/screenshots/02-dashboard-with-bookmarks.png)
+
+---
+
+### 3️⃣ Realtime Multi-Tab (Before)
+![Realtime Before](./src/public/screenshots/03-realtime-multitab-proof-before.png)
+
+### 4️⃣ Realtime Multi-Tab (After)
+![Realtime After](./src/public/screenshots/04-realtime-multitab-proof-after.png)
+
+---
+
+### 5️⃣ Multi-User Isolation (RLS)
+![RLS](./src/public/screenshots/05-rls-user-isolation-proof.png)
