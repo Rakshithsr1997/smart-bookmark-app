@@ -255,23 +255,23 @@ This project demonstrates:
 
 ## 📸 Production Validation
 
-### 1️⃣ Google OAuth Login
+### 1️. Google OAuth Login
 ![Login](./src/public/screenshots/01-google-login-success.png)
 
 ---
 
-### 2️⃣ Dashboard After Login
+### 2️.Dashboard After Login
 ![Dashboard](./src/public/screenshots/02-dashboard-with-bookmarks.png)
 
 ---
 
-### 3️⃣ Realtime Multi-Tab (Before)
+### 3️.Realtime Multi-Tab (Before)
 ![Realtime Before](./src/public/screenshots/03-realtime-multitab-proof-before.png)
 
-### 4️⃣ Realtime Multi-Tab (After)
+### 4️.Realtime Multi-Tab (After)
 ![Realtime After](./src/public/screenshots/04-realtime-multitab-proof-after.png)
 
 ---
 
-### 5️⃣ Multi-User Isolation (RLS)
+### 5️.Multi-User Isolation (RLS)
 ![RLS](./src/public/screenshots/05-rls-user-isolation-proof.png)
