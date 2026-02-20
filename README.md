@@ -256,22 +256,22 @@ This project demonstrates:
 ## 📸 Production Validation
 
 ### 1️.Google OAuth Login
-![Login](./src/public/screenshots/01-google-login-success.PNG)
+![Login](src/public/screenshots/01-google-login-success.PNG)
 
 ---
 
 ### 2️.Dashboard After Login
-![Dashboard](./src/public/screenshots/02-dashboard-with-bookmarks.PNG)
+![Dashboard](src/public/screenshots/02-dashboard-with-bookmarks.PNG)
 
 ---
 
 ### 3️.Realtime Multi-Tab (Before)
-![Realtime Before](./src/public/screenshots/03-realtime-multitab-proof-before.PNG)
+![Realtime Before](src/public/screenshots/03-realtime-multitab-proof-before.PNG)
 
 ### 4️.Realtime Multi-Tab (After)
-![Realtime After](./src/public/screenshots/04-realtime-multitab-proof-after.PNG)
+![Realtime After](src/public/screenshots/04-realtime-multitab-proof-after.PNG)
 
 ---
 
 ### 5️.Multi-User Isolation (RLS)
-![RLS](./src/public/screenshots/05-rls-user-isolation-proof.PNG)
+![RLS](src/public/screenshots/05-rls-user-isolation-proof.PNG)
